@@ -1,0 +1,23 @@
+{
+  "name": "railway",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/253252F25/railway.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/253252F25/railway/issues"
+  },
+  "homepage": "https://github.com/253252F25/railway#readme",
+  "dependencies": {
+    "express": "^4.21.2"
+  },
+  "devDependencies": {}
+}
