@@ -17,7 +17,9 @@
   },
   "homepage": "https://github.com/253252F25/railway#readme",
   "dependencies": {
-    "express": "^4.21.2"
-  },
-  "devDependencies": {}
+    "ejs": "^3.1.10",
+    "express": "^4.21.2",
+    "express-session": "^1.18.1",
+    "mysql": "^2.18.1"
+  }
 }
