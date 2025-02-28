@@ -1,11 +1,12 @@
-const express = require('express');
-const app = express();
-const PORT = process.env.PORT || 3000; // Usa la porta assegnata da Railway
+const express = require('express')
+const app = express()
+const port = 3000
 
 app.get('/', (req, res) => {
-    res.send('Hello from Railway!');
-});
+  res.send('Hello World!')
+  res.end("<input type='password'>")
+})
 
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-});
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`)
+})
