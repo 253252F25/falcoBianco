@@ -1,4 +1,4 @@
-var mysql = require('mysql');
+var mysql = require('mysql2');
 
 var con = mysql.createConnection({
     host: process.env.DB_HOST, // Usa le variabili d'ambiente per la connessione
