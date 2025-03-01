@@ -14,13 +14,24 @@ router.post('/', (req, res) => {
    
     const { username, password } = req.body;
 
-    if (username === "admin" && password === "password") {
-        req.session.password_err = false
-        req.session.user = username; 
-        
-    } else {
-        req.session.password_err = true
-    }
+    const query = 'SELECT * FROM utenti WHERE user = ? AND password = ?';
+    
+    db.query(query, [username, password], (err, result) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).send('Server error');
+        }
+
+        if (result.length > 0) {
+            // Se trovi l'utente, salva l'utente nella sessione
+            req.session.password_err = false;
+            req.session.user = username;
+            res.redirect("/index");
+        } else {
+            // Se l'utente non è trovato o la password è errata
+            req.session.password_err = true;
+            res.redirect("/index");
+        } }) 
     res.redirect("/index");
 });
 
