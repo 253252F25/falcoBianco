@@ -22,16 +22,13 @@ router.post('/', (req, res) => {
             console.error(err);
             return res.status(500).send('Server error').end();
         }
-
         if (result.length > 0) {
             // Se trovi l'utente, salva l'utente nella sessione
             req.session.password_err = false;
             req.session.user = username;
-            res.redirect("/index");
         } else {
             // Se l'utente non è trovato o la password è errata
             req.session.password_err = true;
-            res.redirect("/index");
         } }) 
     res.redirect("/index");
 });
