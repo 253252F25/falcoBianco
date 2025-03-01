@@ -17,6 +17,10 @@ app.all("/index", (req,res) => {
   res.render("index")
 })
 
+app.all("*", (req,res) => {
+  res.redirect("index")
+})
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
