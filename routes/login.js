@@ -12,7 +12,7 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-   
+    req.session.password_err = true;
     const { username, password } = req.body;
 
     const query = 'SELECT * FROM utenti WHERE user = ? AND password = ?';
