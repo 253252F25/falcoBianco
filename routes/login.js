@@ -16,21 +16,23 @@ router.post('/', (req, res) => {
     const { username, password } = req.body;
 
     const query = 'SELECT * FROM utenti WHERE user = ? AND password = ?';
+
     
     con.query(query, [username, password], (err, result) => {
         if (err) {
             console.error(err);
-            return res.status(500).send('Server error').end();
+            return res.status(500).send('Server error');
         }
         if (result.length > 0) {
             // Se trovi l'utente, salva l'utente nella sessione
             req.session.password_err = false;
-            req.session.user = username;
-        } else {
+            req.session.user = username; 
+        } else { 
             // Se l'utente non è trovato o la password è errata
             req.session.password_err = true;
-        } }) 
-    res.redirect("/index");
+        }
+        res.redirect("/index");
+    })  
 });
 
 module.exports = router;
