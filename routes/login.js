@@ -1,4 +1,5 @@
 const express = require('express');
+const con = require('../utils/conn');
 const router = express.Router();
 
 router.get('/', (req, res) => {
@@ -16,7 +17,7 @@ router.post('/', (req, res) => {
 
     const query = 'SELECT * FROM utenti WHERE user = ? AND password = ?';
     
-    db.query(query, [username, password], (err, result) => {
+    con.query(query, [username, password], (err, result) => {
         if (err) {
             console.error(err);
             return res.status(500).send('Server error');
