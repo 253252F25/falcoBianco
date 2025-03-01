@@ -13,6 +13,10 @@ const login = require('./routes/login');
 // Usa le rotte con un prefisso
 app.use('/login', login);
 
+app.all("/index", (req,res) => {
+  res.render("index")
+})
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
