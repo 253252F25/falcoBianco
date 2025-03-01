@@ -20,7 +20,7 @@ router.post('/', (req, res) => {
     con.query(query, [username, password], (err, result) => {
         if (err) {
             console.error(err);
-            return res.status(500).send('Server error');
+            return res.status(500).send('Server error').end();
         }
 
         if (result.length > 0) {
