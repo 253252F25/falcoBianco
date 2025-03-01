@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+
+*{
+    box-sizing: border-box;
+    font-family: "Raleway", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+}
+
+body {
+    padding-left: 200px;
+    color:aliceblue;
+    background-color: #313131;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.171) 2px, transparent 0);
+    background-size: 30px 30px;
+    background-position: -5px -5px
+}
+
+
+.menu{
+    background-color: #0e0e0e;
+    color: aliceblue;
+    padding: 20px;
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    height: 100svh;
+    width: 200px;
+}
+
+.menu .voce{
+    display: flex;
+    column-gap: 20px;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 5px;
+    margin: 10px 0px;
+    align-items: center;
+    text-decoration: none;
+    color: unset;
+    min-width: 80px;
+}
+
+.menu .voce:hover{
+    background-color: #2b2b2b;
+}
+
+
+.last {
+    position: absolute;
+    bottom: 16px; 
+    width: 160px;
+}
+
+@media screen and (max-width: 992px) {
+    .menu {
+        position: fixed;
+        height: 95px;
+        width: 100%;
+        overflow: scroll;
+        left: 0px;
+        display: flex ;
+        align-items: center;
+        padding: 0px 15px;
+        justify-content: space-around;
+    }
+
+    .menu .voce {
+        display: flex;
+        column-gap: 20px;
+        cursor: pointer;
+        padding: 5px;
+        border-radius: 5px;
+        margin: 10px 0px;
+        align-items: center;
+        text-decoration: none;
+        color: unset;
+        flex-direction: column;
+    }
+    .last{
+        all:unset
+
+    }
+    .logo{display: none;}
+    body{padding-left: unset;}
+}
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888; 
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }

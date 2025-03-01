@@ -1,17 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Login</title>
+    <link rel="stylesheet" href="login.css">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 </head>
 <body>
-
-    <form action="" method="post">
-        <input type="text">
-        <input type="password" name="" id="">
-        <input type="submit" value="">
-    </form>
     
+    <form action="" method="post">
+        <input class="<%= password_err %>" type="text" name="username" placeholder="Username" autocomplete="off">
+        <input class="<%= password_err %>" type="password" name="password" id="password" placeholder="Password" autocomplete="off">
+        <input type="submit" class="material-symbols-outlined <%= password_err %>" value="east">
+        
+    </form>
+
 </body>
 </html>
