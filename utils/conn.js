@@ -8,6 +8,10 @@ var con = mysql.createConnection({
     port:process.env.DB_PORT
 });
 
+con.on('end', () => {
+  console.log('⚠️ La connessione è già chiusa - La connessione è stata chiusa.');
+});
+
 con.connect(function(err) {
   if (err) throw err;
   console.log("Connected!");

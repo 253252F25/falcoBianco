@@ -21,7 +21,8 @@ router.post('/', (req, res) => {
     con.query(query, [username, password], (err, result) => {
         if (err) {
             console.error(err);
-            return res.status(500).send('Server error');
+
+            return res.status(500).send('Server error' + err.code);
         }
         if (result.length > 0) {
             // Se trovi l'utente, salva l'utente nella sessione
