@@ -37,7 +37,7 @@ router.post('/', (req, res) => {
     })
 });
 
-router.all('/', (req, res) => {
+router.all('/info', (req, res) => {
     const { id, user, admin } = req.session;
     if (req.session.user) {
         res.json({

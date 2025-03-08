@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
 
-*{
+* {
     box-sizing: border-box;
     font-family: "Raleway", sans-serif;
     font-optical-sizing: auto;
@@ -10,15 +10,34 @@
 
 body {
     padding-left: 200px;
-    color:aliceblue;
+    color: #c4c4c4;
     background-color: #313131;
     background-image: radial-gradient(rgba(255, 255, 255, 0.171) 2px, transparent 0);
     background-size: 30px 30px;
-    background-position: -5px -5px
+    background-position: -5px -5px;
+    animation: back 60s infinite;
+
 }
 
+@keyframes back {
+    0%, 100% {
+        background-position: 0px 0px;
+    }
 
-.menu{
+    25% {
+        background-position: 150px 0px;
+    }
+
+    50% {
+        background-position: 150px 150px;
+    }
+
+    75% {
+        background-position: 0px 150px;
+    }
+
+}
+.menu {
     background-color: #0e0e0e;
     color: aliceblue;
     padding: 20px;
@@ -29,7 +48,7 @@ body {
     width: 200px;
 }
 
-.menu .voce{
+.menu .voce {
     display: flex;
     column-gap: 20px;
     cursor: pointer;
@@ -42,14 +61,14 @@ body {
     min-width: 80px;
 }
 
-.menu .voce:hover{
+.menu .voce:hover {
     background-color: #2b2b2b;
 }
 
 
 .last {
     position: absolute;
-    bottom: 16px; 
+    bottom: 16px;
     width: 160px;
 }
 
@@ -60,7 +79,7 @@ body {
         width: 100%;
         overflow: scroll;
         left: 0px;
-        display: flex ;
+        display: flex;
         align-items: center;
         padding: 0px 15px;
         justify-content: space-around;
@@ -78,29 +97,146 @@ body {
         color: unset;
         flex-direction: column;
     }
-    .last{
-        all:unset
 
+    .last {
+        all: unset
     }
-    .logo{display: none;}
-    body{padding-left: unset;}
+
+    .logo {
+        display: none;
+    }
+
+    body {
+        padding-left: unset;
+    }
 }
+
 /* width */
 ::-webkit-scrollbar {
     width: 10px;
-  }
-  
-  /* Track */
-  ::-webkit-scrollbar-track {
-    background: #f1f1f1; 
-  }
-   
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
-    background: #888; 
-  }
-  
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
-    background: #555; 
-  }
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+.lig {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+
+    position: relative;
+    background: linear-gradient(155deg, rgba(255, 255, 255, 0.24) 0%, rgba(255, 255, 255, 0.14) 25%, rgba(255, 255, 255, 0.18) 49%, rgba(0, 0, 0, 0) 78%, rgba(0, 0, 0, 0.8) 100%);
+    box-shadow: 0px 0px 3px #222;
+}
+
+.success {
+    animation: example 2s infinite;
+    --col: #009213;
+    animation-delay: .2s;
+}
+
+.danger {
+    animation: example 2s infinite;
+    --col: #ff0000;
+    animation-delay: .4s;
+}
+
+.warning {
+    animation: example 2s infinite;
+    --col: #ff9900;
+    animation-delay: .8s;
+}
+
+@keyframes example {
+    0% {
+        background-color: var(--col);
+        box-shadow: 0px 0px 100px 25px var(--col);
+    }
+
+    5% {
+        background-color: transparent;
+        box-shadow: 0px 0px 100px 25px transparent;
+    }
+
+    10% {
+        background-color: var(--col);
+        box-shadow: 0px 0px 100px 25px var(--col);
+    }
+
+    15% {
+        background-color: transparent;
+        box-shadow: 0px 0px 100px 25px transparent;
+    }
+
+    20% {
+        background-color: var(--col);
+        box-shadow: 0px 0px 100px 25px var(--col);
+    }
+
+    25% {
+        background-color: transparent;
+        box-shadow: 0px 0px 100px 25px transparent;
+    }
+
+    50% {
+        background-color: transparent;
+        box-shadow: 0px 0px 100px 25px transparent;
+    }
+
+    100% {
+        background-color: transparent;
+        box-shadow: 0px 0px 100px 25px transparent;
+    }
+}
+
+
+.fl {
+    display: flex;
+    align-items: center;
+    color: gray;
+    margin: 2px;
+    padding: 15px;
+    column-gap: 20px;
+    font-size: 2pc;
+}
+
+.cont {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+}
+
+.sys {
+ 
+    margin: 50px 10px;
+    width: 100%;
+    background-color: #222;
+    border-radius: 20px;
+    padding: 5px 15px;
+}
