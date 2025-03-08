@@ -26,13 +26,24 @@ router.post('/', (req, res) => {
         if (result.length > 0) {
             // Se trovi l'utente, salva l'utente nella sessione
             req.session.password_err = false;
-            req.session.user = username; 
+            req.session.id = result[0].id; 
+            req.session.user = result[0].user; 
+            req.session.admin = result[0].admin; 
         } else { 
             // Se l'utente non è trovato o la password è errata
             req.session.password_err = true;
         }
         res.redirect("/index");
     })  
+});
+
+router.all('/', (req, res) => {
+    const { id, user, admin } = req.session;
+    res.json({
+        id:id,
+        user:user,
+        admin:admin,
+    });
 });
 
 module.exports = router;
