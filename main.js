@@ -1,9 +1,7 @@
 const express = require('express')
-const ejs = require("ejs")
 const session = require('express-session')
-
 const auth = require("./utils/auth")
-const con = require("./utils/conn")
+ 
 
 const app = express()
 const port = 3000
@@ -32,7 +30,7 @@ app.all("/logout", auth, (req,res) => {
   res.redirect("/login")  
 })
 
-app.all("/", (req,res) => {
+app.all("/", (req, res) => {
   res.redirect("/index")
 })
 

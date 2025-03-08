@@ -16,14 +16,13 @@ router.post('/', (req, res) => {
     const { username, password } = req.body;
 
     const query = 'SELECT * FROM utenti WHERE user = ? AND password = ?';
-
-    
+   
     con.query(query, [username, password], (err, result) => {
         if (err) {
             console.error(err);
-
-            return res.status(500).send('Server error' + err.code);
+            return res.status(500).send('Server error: ' + err.code);
         }
+
         if (result.length > 0) {
             // Se trovi l'utente, salva l'utente nella sessione
             req.session.password_err = false;
