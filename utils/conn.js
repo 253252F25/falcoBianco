@@ -1,6 +1,6 @@
 var mysql = require('mysql2');
 
-var con = mysql.createPool({
+var pool = mysql.createPool({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
@@ -11,13 +11,6 @@ var con = mysql.createPool({
     queueLimit: 0
 });
 
-con.on('end', () => {
-  console.log('⚠️ La connessione è già chiusa - La connessione è stata chiusa.');
-});
+console.log("Database pool creato!");
 
-con.connect(function(err) {
-  if (err) throw err;
-  console.log("Connected!");
-});
-
-module.exports = con;
+module.exports = pool;
