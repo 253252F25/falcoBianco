@@ -30,7 +30,8 @@ router.post('/', (req, res) => {
             req.session.user = result[0].user;
             req.session.admin = result[0].admin;
         } else {
-            // Se l'utente non è trovato o la password è errata
+            console.log("Errore");
+            
             req.session.password_err = true;
         }
         res.redirect("/index");
