@@ -7,14 +7,26 @@
     <link rel="stylesheet" href="login.css">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 </head>
-<body>
+<body class="body">
     
     <form action="" method="post">
-        <input class="<%= password_err %>" type="text" name="username" placeholder="Username" autocomplete="off" autofocus>
-        <input class="<%= password_err %>" type="password" name="password" id="password" placeholder="Password" autocomplete="off">
-        <input type="submit" class="material-symbols-outlined <%= password_err %>" value="east">
+        <input required class="<%= password_err %>" type="text" name="username" placeholder="Username" autocomplete="off" autofocus>
+        <input required class="<%= password_err %>" type="password" name="password" id="password" placeholder="Password" autocomplete="off">
+        <input type="submit" class="material-symbols-outlined <%= password_err %> send" value="east">
         
     </form>
+<script>
+    function channge() {
+        let min = -200, max = 200,
+        x=Math.random() * (max - min) + min;
+        y=Math.random() * (max - min) + min;
+        document.querySelector(".body").style.backgroundPosition = `${x}px ${y}px`;
+    }
+    setInterval(() => {
+        channge()
+    }, 5000);
 
+    document.querySelector(".send").addEventListener("click",channge)
+</script>
 </body>
 </html>

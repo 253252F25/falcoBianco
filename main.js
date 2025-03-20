@@ -1,16 +1,26 @@
 const express = require('express')
 const session = require('express-session')
 const auth = require("./utils/auth")
- 
+const MySQLStore = require("express-mysql-session")(session);
+const conn = require("./utils/conn");  // Importa la connessione MySQL
+
+// Configura il session store
+const sessionStore = new MySQLStore({}, conn); 
 
 const app = express()
 const port = 3000
 app.use(express.static('public'));
+
+
+
 app.use(session({
     secret: "segreto",
     resave: false,
-    saveUninitialized: true
+    saveUninitialized: false, // Meglio false per sicurezza
+    store: sessionStore, // Usa il database per le sessioni
+    cookie: { secure: false } // Cambia in `true` se usi HTTPS
 }));
+
 app.use(express.urlencoded({ extended: true })); // Importante per gestire req.body
 app.use(express.json()); // Se stai usando JSON invece di form
 

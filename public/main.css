@@ -6,35 +6,41 @@
     font-optical-sizing: auto;
     font-weight: 600;
     font-style: normal;
+
+}
+*:focus {
+    outline: 1px solid #f0f8ff8a;
+    animation: back 1.5s infinite; 
 }
 
+@keyframes back {
+    0% {
+        outline-offset: 10px;
+        outline: 1px solid #f0f8ff8a;
+    }
+
+    50% {
+        outline-offset: 0px;
+        outline: 1px solid #f0f8ff8a;
+    }
+    60%,70%,80%{
+        outline: 1px solid transparent;
+    }
+    65%,75%,85%{
+        outline: 1px solid #f0f8ff8a;
+    }
+    
+    100% {
+        outline-offset: 0px;
+        outline: 1px solid #f0f8ff8a;
+    }
+
+}
 body {
     padding-left: 200px;
     color: #c4c4c4;
     background-color: #313131;
-    background-image: radial-gradient(rgba(255, 255, 255, 0.171) 2px, transparent 0);
-    background-size: 30px 30px;
-    background-position: -5px -5px;
-    animation: back 60s infinite;
 
-}
-
-@keyframes back {
-    0%, 100% {
-        background-position: 0px 0px;
-    }
-
-    25% {
-        background-position: 150px 0px;
-    }
-
-    50% {
-        background-position: 150px 150px;
-    }
-
-    75% {
-        background-position: 0px 150px;
-    }
 
 }
 .menu {
@@ -131,100 +137,6 @@ body {
     background: #555;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
- 
-
-.lig {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-
-    position: relative;
-    background: linear-gradient(155deg, rgba(255, 255, 255, 0.24) 0%, rgba(255, 255, 255, 0.14) 25%, rgba(255, 255, 255, 0.18) 49%, rgba(0, 0, 0, 0) 78%, rgba(0, 0, 0, 0.8) 100%);
-    box-shadow: 0px 0px 3px #222;
-}
-
-.success {
-    animation: example 2s infinite;
-    --col: #009213;
-    animation-delay: .2s;
-}
-
-.danger {
-    animation: example 2s infinite;
-    --col: #ff0000;
-    animation-delay: .4s;
-}
-
-.warning {
-    animation: example 2s infinite;
-    --col: #ff9900;
-    animation-delay: .8s;
-}
-
-@keyframes example {
-    0% {
-        background-color: var(--col);
-        box-shadow: 0px 0px 100px 25px var(--col);
-    }
-
-    5% {
-        background-color: transparent;
-        box-shadow: 0px 0px 100px 25px transparent;
-    }
-
-    10% {
-        background-color: var(--col);
-        box-shadow: 0px 0px 100px 25px var(--col);
-    }
-
-    15% {
-        background-color: transparent;
-        box-shadow: 0px 0px 100px 25px transparent;
-    }
-
-    20% {
-        background-color: var(--col);
-        box-shadow: 0px 0px 100px 25px var(--col);
-    }
-
-    25% {
-        background-color: transparent;
-        box-shadow: 0px 0px 100px 25px transparent;
-    }
-
-    50% {
-        background-color: transparent;
-        box-shadow: 0px 0px 100px 25px transparent;
-    }
-
-    100% {
-        background-color: transparent;
-        box-shadow: 0px 0px 100px 25px transparent;
-    }
-}
-
-
-.fl {
-    display: flex;
-    align-items: center;
-    color: gray;
-    margin: 2px;
-    padding: 15px;
-    column-gap: 20px;
-    font-size: 2pc;
-}
 
 .cont {
     display: flex;
