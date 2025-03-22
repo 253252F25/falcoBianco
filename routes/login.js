@@ -1,23 +1,35 @@
 const express = require('express');
-const con = require('../utils/conn');
+const con = require('../utils/conn'); 
 const router = express.Router();
 
-router.get('/', (req, res) => {
-    mes = { password_err: "" }
-    if (req.session.password_err) {
-        mes = { password_err: "err" }
+router.get('/', (req, res) => { 
+    
+    var mes = {}
+
+    if (req.session.user) {
+        mes["user"] = req.session.user
+    } else {
+        mes["user"] = false
     }
-    req.session.password_err = false
+
+    if (req.session.password_err) {
+        mes["password_err"] = true;
+    } else {
+        mes["password_err"] = false;
+    }
+
     res.render("login", mes);
 });
 
+
 router.post('/', (req, res) => {
-    req.session.password_err = true;
     const { username, password } = req.body;
 
     const query = 'SELECT * FROM utenti WHERE user = ? AND password = ?';
 
     con.query(query, [username, password], (err, result) => {
+        console.log(result);
+        
         if (err) {
             console.error(err);
             return res.status(500).send('Server error: ' + err.code);
@@ -30,8 +42,6 @@ router.post('/', (req, res) => {
             req.session.user = result[0].user;
             req.session.admin = result[0].admin;
         } else {
-            console.log("Errore");
-            
             req.session.password_err = true;
         }
         res.redirect("/index");

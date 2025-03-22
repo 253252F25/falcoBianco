@@ -27,15 +27,15 @@ app.use(express.json()); // Se stai usando JSON invece di form
 app.set('view engine', 'ejs');
 
 const login = require('./routes/login');
+const index = require('./routes/index');
 
 // Usa le rotte con un prefisso
 app.use('/login', login);
 
-app.all("/index", auth, (req,res) => {
-  res.render("index")
-})
+app.use("/index", auth, index);
 
 app.all("/logout", auth, (req,res) => {
+  req.session.user = false
   req.session.destroy();
   res.redirect("/login")  
 })

@@ -1,36 +1,93 @@
 <!DOCTYPE html>
 <html lang="it">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" href="login.css">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <meta name="theme-color" content="#4285f4" />
 </head>
+
 <body class="body">
     <div class="dati">
-        <div class="data">a</div>
-        <div class="ora">b</div>
-    </div>
-    
-    <form action="" method="post">
-        <input required class="<%= password_err %>" type="text" name="username" placeholder="Username" autocomplete="off" autofocus>
-        <input required class="<%= password_err %>" type="password" name="password" id="password" placeholder="Password" autocomplete="off">
-        <input type="submit" class="material-symbols-outlined <%= password_err %> send" value="east">
-        
-    </form>
-<script>
-    function channge() {
-        let min = -200, max = 200,
-        x=Math.random() * (max - min) + min;
-        y=Math.random() * (max - min) + min;
-        document.querySelector(".body").style.backgroundPosition = `${x}px ${y}px`;
-    }
-    setInterval(() => {
-        channge()
-    }, 5000);
+        <div class="data"><span class="day"></span>/<span class="month"></span>/<span class="year"></span></div>
+        <div class="ora">
+            <span class="houres"></span>:<span class="minutes"></span>
+        </div>
+    </div> 
 
-    document.querySelector(".send").addEventListener("click",channge)
-</script>
+
+
+    <% 
+    var password_err_wa = ""
+    if (password_err) {
+        password_err_wa = "err" %>
+        <p class="danger">Username o password errati</p>
+    <% } %>
+    <form action="" method="post">
+        <input required class="<%= password_err_wa %>" type="text" name="username" placeholder="Username"
+            autocomplete="off" autofocus>
+        <input required class="<%= password_err_wa %>" type="password" name="password" id="password" placeholder="Password"
+            autocomplete="off">
+        <input type="submit" class="material-symbols-outlined <%= password_err_wa %> send" value="east">
+
+    </form>
+    <% if (user) { %>
+        <a href="/index" class="user">Continua come: <span> <%= user %></span> </a>
+    <% } %>
+
+    <div class="bott">
+        <div class="flag">
+            <div class="bar b3"></div>
+            <div class="bar b2"></div>
+            <div class="bar b1"></div>
+        </div>
+        Developed in italy
+    </div>
+
+    <script>
+        function channge() {
+            let min = -200, max = 200,
+                x = Math.random() * (max - min) + min;
+            y = Math.random() * (max - min) + min;
+            document.querySelector(".body").style.backgroundPosition = `${x}px ${y}px`;
+        }
+
+
+        document.querySelector(".send").addEventListener("click", channge)
+        function startTime() {
+            const currentDate = new Date();
+            let hours = currentDate.getHours();
+            let minutes = currentDate.getMinutes();
+            let year = currentDate.getFullYear();
+            let month = currentDate.getMonth() + 1; // Mese: +1 perché getMonth() restituisce 0-11
+            let day = currentDate.getDate(); // getDate() restituisce il giorno del mese
+
+            hours = formatTime(hours);
+            minutes = formatTime(minutes);
+            month = formatTime(month);
+            day = formatTime(day);
+
+            document.querySelector(".houres").textContent = hours;
+            document.querySelector(".minutes").textContent = minutes;
+            document.querySelector(".year").textContent = year;
+            document.querySelector(".month").textContent = month;
+            document.querySelector(".day").textContent = day;
+        }
+
+
+        function formatTime(value) {
+            return value < 10 ? "0" + value : value; // Aggiunge uno zero davanti ai numeri < 10
+        }
+
+        setInterval(() => {
+            channge()
+            startTime()
+        }, 5000); 
+        startTime()
+    </script>
 </body>
+
 </html>
