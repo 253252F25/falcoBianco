@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <link rel="stylesheet" href="/main.css">
+</head>
+<%- include('menu.ejs') %>
+
+    <body>
+        <div class="title">
+            Conti
+        </div>
+        <div class="select">
+        </div>
+
+        <div class="movimenti">
+
+        </div>
+    </body>
+
+</html>
+
+<script>
+    function creaConto( descrizione, importo, id) {
+        const movimento = document.createElement("div");
+        movimento.className = `mpvimento`;
+
+        const details = document.createElement("div");
+        details.className = "details";
+
+        const dataSpan = document.createElement("span");
+        dataSpan.className = "data"; 
+
+        const desSpan = document.createElement("span");
+        desSpan.className = "des";
+        desSpan.textContent = descrizione;
+
+        details.appendChild(dataSpan);
+        details.appendChild(desSpan);
+
+        const dfrg = document.createElement("div");
+        dfrg.className = "dfrg";
+
+        const importoSpan = document.createElement("span");
+        importoSpan.className = "importo";
+        importoSpan.textContent = importo;
+
+        const visu = document.createElement("div");
+        visu.className = "visu";
+
+        const icon = document.createElement("a");
+        icon.href = `/movimenti/${id}`
+        icon.className = "material-symbols-outlined";
+        icon.textContent = "north_east";
+
+        visu.appendChild(icon);
+        dfrg.appendChild(importoSpan);
+        dfrg.appendChild(visu);
+
+        movimento.appendChild(details);
+        movimento.appendChild(dfrg);
+
+        return movimento;
+    }
+
+    var tabmov = document.querySelector(".movimenti");
+
+    inviaDati("/conti").then(conti => {
+        tabmov.innerHTML = "";
+        conti.forEach(conto => {
+            tabmov.append(creaConto(conto.nome, conto.saldo, conto.id))
+        });
+        
+    });
+
+</script>

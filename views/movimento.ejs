@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <link rel="stylesheet" href="/main.css">
+</head>
+<%- include('menu.ejs') %>
+
+    <body>
+        <div class="title">
+            Movimento #TNSIN-<%= id %>-L
+        </div>
+        <% label = importo < 0 ? "q": "incom" %>
+        <div class="movimento <%= label %>">
+            <div><%= (importo/100) %> €</div>
+            <div>
+                <p><b>Data:</b> <%= data = new Date(created_at).toLocaleDateString() %></p>
+                <p><b>Conto associato: </b> <%= conto %> (<%= idc %>)</p>
+                <p><b>Intestatario: </b> <%= nmu %> (<%= utente %>)</p>
+                <p><b>ID transazione: </b>TNSIN-<%= id %>-L</p>
+            </div>
+        </div>
+        <div class="p20"><p><b>Bescrizione: </b><%= descrizione %></p>
+    </div></body>
+
+</html>

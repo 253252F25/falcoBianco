@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <link rel="stylesheet" href="/main.css">
+</head>
+<%- include('menu.ejs') %>
+
+    <body>
+        <div class="title">
+            Veicoli
+        </div>
+
+
+
+        <div class="select">
+        </div>
+
+        <div class="griglia">
+
+        </div>
+    </body>
+
+</html>
+
+<script>
+function creaVeicolo(id, img, targa, telaio, marca, modello, tipo, immatricolazione, data_libretto, col_lib,libretto_rif) {
+    const output = document.createElement("div");
+
+    // Targa
+    var targaDiv = document.createElement("div");
+    targaDiv.classList.add("targa");
+    targaDiv.textContent = targa;
+
+    // Immagine
+    var imgElement = document.createElement("img");
+    imgElement.classList.add("img");
+    imgElement.src = "assets/tipoveicolo/" + img;
+
+    // Telaio
+    var telaioLabel = document.createElement("label");
+    telaioLabel.textContent = "Telaio: ";
+    var telaioDiv = document.createElement("div");
+    telaioDiv.classList.add("telaio");
+    telaioDiv.textContent = telaio;
+
+    // Modello
+    var modelloLabel = document.createElement("label");
+    modelloLabel.textContent = "Modello: ";
+    var modelloDiv = document.createElement("div");
+    modelloDiv.classList.add("modello");
+    modelloDiv.textContent = marca + " - " + modello;
+
+    // Tipo
+    var tipoLabel = document.createElement("label");
+    tipoLabel.textContent = "Tipo: ";
+    var tipoDiv = document.createElement("div");
+    tipoDiv.classList.add("tipo");
+    tipoDiv.textContent = tipo;
+
+    // Immatricolazione
+    var immatricolazioneLabel = document.createElement("label");
+    immatricolazioneLabel.textContent = "Immatricolazione: ";
+    var immatricolazioneDiv = document.createElement("div");
+    immatricolazioneDiv.classList.add("immatricolazione");
+    immatricolazioneDiv.textContent = immatricolazione;
+
+    // Data libretto
+    var dataLibrettoLabel = document.createElement("label");
+    dataLibrettoLabel.textContent = "Data Libretto: ";
+    var librettospan = document.createElement("div");
+    librettospan.classList.add("immatricolazione");
+    librettospan.style.color = col_lib;
+    librettospan.textContent = data_libretto;
+
+    // Icone
+    var deleteSpan = document.createElement("div");
+    deleteSpan.classList.add("material-symbols-outlined");
+    deleteSpan.textContent = "delete";
+    
+    var downloadSpan = document.createElement("a");
+    downloadSpan.classList.add("material-symbols-outlined");
+    downloadSpan.textContent = "download";
+    downloadSpan.href = `/uploads/${libretto_rif}`
+
+    var editSpan = document.createElement("a");
+    editSpan.classList.add("material-symbols-outlined");
+    editSpan.textContent = "edit";
+    editSpan.href = `/veicoli/${id}`
+
+    // Aggiungi le icone alla riga
+    var row3 = document.createElement("div");
+    row3.classList.add("row");
+    row3.append(editSpan);
+    row3.append(deleteSpan);
+    row3.append(downloadSpan);
+
+    // Organizza tutto nel div principale
+    output.classList.add("veicolo");
+    output.append(targaDiv);
+    output.append(imgElement);
+    output.append(telaioLabel, telaioDiv);
+    output.append(modelloLabel, modelloDiv);
+    output.append(tipoLabel, tipoDiv);
+    output.append(immatricolazioneLabel, immatricolazioneDiv);
+    output.append(dataLibrettoLabel, librettospan);
+    output.append(row3);
+
+    return output;
+}
+
+
+    function selimg(id) {
+        switch (id) {
+            case 1:
+                return "motrice.svg"
+                break;
+
+            case 2:
+                return "trattore.svg"
+                break;
+            case 3:
+                return "semirimorchio.svg"
+                break;
+
+            case 4:
+                return "autovettura.svg"
+                break;
+            case 5:
+                return "furgone.svg"
+                break;
+
+            case 8:
+                return "bica.svg"
+                break;
+            case 13:
+                return "ridotto.svg"
+                break;
+            default:
+                return "dan.svg";
+                break;
+        }
+
+    }
+
+    var tabmov = document.querySelector(".griglia");
+    inviaDati("/veicoli").then(conti => {
+    tabmov.innerHTML = ""; // Resetta il contenuto della tabella
+
+    conti.forEach(veicoli => {
+        var id = veicoli.id;
+        var img = selimg(veicoli.tipo);
+        var targa = veicoli.targa;
+        var telaio = veicoli.telaio;
+        var marca = veicoli.marca;
+        var modello = veicoli.modello;
+        var tipo = veicoli.denom;
+        var libretto_rif = veicoli.libretto_rif;
+
+        // Gestione della data di libretto_rif
+        let datalib, col_lib;
+        if (veicoli.libretto) {
+            datalib = new Date(veicoli.libretto).toLocaleDateString();
+            col_lib = (new Date(veicoli.libretto) > new Date() ? "unset":"#f00" );
+        } else {
+            datalib = "Non Registrato";
+            col_lib = "#f00";
+        }
+
+        // Gestione della data di immatricolazione
+        let data;
+        if (veicoli.immatricolazione) {
+            data = new Date(veicoli.immatricolazione).toLocaleDateString();
+        } else {
+            data = "Non Registrato";
+        }
+
+        // Aggiungi il veicolo alla tabella
+        tabmov.append(creaVeicolo(id, img, targa, telaio, marca, modello, tipo, data, datalib, col_lib, libretto_rif));
+    });
+});
+
+</script>

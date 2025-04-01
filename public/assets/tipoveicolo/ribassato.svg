@@ -1,0 +1,15 @@
+<svg width="1252" height="251" viewBox="0 0 1252 251" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M4 150V100C4 98.3431 5.34315 97 7 97H193C194.657 97 196 98.3431 196 100V127.5C196 129.157 197.343 130.5 199 130.5H241.958C242.926 130.5 243.834 130.967 244.397 131.754L281.603 183.746C282.166 184.533 283.074 185 284.042 185H995H1227.34C1228.89 185 1230.12 183.75 1230.26 182.208C1239.55 83.4293 1238.52 101.986 1248 1V203.5C1248 205.157 1246.66 206.5 1245 206.5H995H284.026C283.067 206.5 282.166 206.042 281.601 205.267L244.399 154.233C243.834 153.458 242.933 153 241.974 153H7C5.34315 153 4 151.657 4 150Z" fill="#E8F0FE" stroke="#0972D3" stroke-width="8"/>
+<rect x="1139" y="241" width="43" height="45" rx="21.5" transform="rotate(180 1139 241)" fill="white" stroke="#A4A4A4" stroke-width="8"/>
+<rect x="1126" y="227" width="17" height="18" rx="8.5" transform="rotate(180 1126 227)" stroke="#A4A4A4" stroke-width="8"/>
+<rect x="1074" y="241" width="43" height="45" rx="21.5" transform="rotate(180 1074 241)" fill="white" stroke="#A4A4A4" stroke-width="8"/>
+<rect x="1061" y="227" width="17" height="18" rx="8.5" transform="rotate(180 1061 227)" stroke="#A4A4A4" stroke-width="8"/>
+<rect x="1010" y="241" width="44" height="45" rx="22" transform="rotate(180 1010 241)" fill="white" stroke="#A4A4A4" stroke-width="8"/>
+<rect x="997" y="227" width="18" height="18" rx="9" transform="rotate(180 997 227)" stroke="#A4A4A4" stroke-width="8"/>
+<path d="M371 197H383" stroke="#FF5500" stroke-width="5" stroke-linecap="round"/>
+<path d="M692 197H704" stroke="#FF5500" stroke-width="5" stroke-linecap="round"/>
+<path d="M509 197H521" stroke="#FF5500" stroke-width="5" stroke-linecap="round"/>
+<path d="M872 197H884" stroke="#FF5500" stroke-width="5" stroke-linecap="round"/>
+<path d="M1182 197H1194" stroke="#FF5500" stroke-width="5" stroke-linecap="round"/>
+<path d="M242.5 245C242.5 248.038 244.962 250.5 248 250.5C251.038 250.5 253.5 248.038 253.5 245L242.5 245ZM253.5 245L253.5 165L242.5 165L242.5 245L253.5 245Z" fill="#A4A4A4"/>
+</svg>

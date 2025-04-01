@@ -21,14 +21,12 @@ router.get('/', (req, res) => {
     res.render("login", mes);
 });
 
-
 router.post('/', (req, res) => {
     const { username, password } = req.body;
 
     const query = 'SELECT * FROM utenti WHERE user = ? AND password = ?';
 
     con.query(query, [username, password], (err, result) => {
-        console.log(result);
         
         if (err) {
             console.error(err);
@@ -37,8 +35,9 @@ router.post('/', (req, res) => {
 
         if (result.length > 0) {
             // Se trovi l'utente, salva l'utente nella sessione
+            req.session.messaggi = []
             req.session.password_err = false;
-            req.session.id = result[0].id;
+            req.session.idu = result[0].id;
             req.session.user = result[0].user;
             req.session.admin = result[0].admin;
         } else {

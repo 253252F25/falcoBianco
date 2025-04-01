@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <link rel="stylesheet" href="/main.css">
+</head>
+<%- include('menu.ejs') %>
+
+    <body>
+        <div class="title">
+            <%= veicoli.targa %>
+        </div>
+            <form action="" method="post" enctype="multipart/form-data">
+            <div class="griglia">
+                    <div class="labelcont">
+                        <label for="targa">Targa</label><input type="text" name="targa" id="targa" value="<%= veicoli.targa %>">
+                    </div>
+                    
+                    <div class="labelcont">
+                        <label for="telaio">telaio</label><input type="text" name="telaio" id="telaio" value="<%= veicoli.telaio %>">
+                    </div>
+                    
+                    <div class="labelcont">
+                        <label for="modello">modello</label><input type="text" name="modello" id="modello" value="<%= veicoli.modello %>">
+                    </div>
+                    
+                    <div class="labelcont">
+                        <label for="marca">marca</label><input type="text" name="marca" id="marca" value="<%= veicoli.marca %>">
+                    </div>
+                    
+                    <div class="labelcont">
+                        <label for="marca">tipologia</label>
+                        <select name="tipo" id="tipo">
+                            <%
+                            tipologia.forEach(async (opt) => { 
+                                let s = ""
+                                if(opt.id == veicoli.tipo){
+                                    s = "selected"
+                                }
+                            %>
+                                <option <%= s %> value="<%= opt.id %>"><%= opt.denominazione %></option>                
+                            <%  }); %>
+                                
+                        </select>
+                    </div>
+                    
+                    <div class="labelcont">
+                        <%
+                        function formatDate(date) {
+                            if (!date) return "";
+                            
+                            // Creiamo un nuovo oggetto Date con il fuso orario locale
+                            let d = new Date(date);
+                            
+                            // Estraggo Anno, Mese e Giorno con il fuso locale
+                            let year = d.getFullYear();
+                            let month = String(d.getMonth() + 1).padStart(2, "0"); // Mesi da 0 a 11, quindi +1
+                            let day = String(d.getDate()).padStart(2, "0");
+                        
+                            return `${year}-${month}-${day}`;
+                        }
+                        
+                        var di = formatDate(veicoli.immatricolazione);
+                        var dl = formatDate(veicoli.libretto);
+                        
+                        %>
+                        <label for="immatricolazione">Immatricolazione</label>
+                        <input type="date" name="immatricolazione" id="immatricolazione" value="<%= di %>">
+                    </div>
+                    
+                    <div class="labelcont">
+                        
+                        <label for="librettodata">Libretto Scadenza</label>
+                        <input type="date" name="librettodata" id="librettodata" value="<%= dl %>">
+                    </div>
+                    
+                    
+                    <div class="labelcont">
+                        <label>Preferenze</label>
+                        <div>
+                            <%
+                            crevisioni = ""
+                            if(veicoli.revisioni === 1){ crevisioni = "checked"}
+                            cassicurazioni = ""
+                            if(veicoli.assicurazioni === 1){ cassicurazioni = "checked"}
+                            ctachigrafo = ""
+                            if(veicoli.tachigrafo === 1){ ctachigrafo = "checked"}
+                            cattivo = ""
+                            if(veicoli.attivo === 1){ cattivo = "checked"}
+                            %>
+                            <p>
+                                <label class="container">Revisione
+                                    <input type="checkbox" name="revisioni" id="revisioni" <%= crevisioni %>>
+                                    <span class="checkmark"></span>
+                                  </label>
+                            </p>
+                            <p>
+                                <label class="container">Assicurazione
+                                    <input type="checkbox" name="assicurazione" id="assicurazione" <%= cassicurazioni %>>
+                                    <span class="checkmark"></span>
+                                  </label>
+                            </p>
+                            <p>
+                                <label class="container">Tachigrafo
+                                    <input type="checkbox" name="tachigrafo" id="tachigrafo" <%= ctachigrafo %>>
+                                    <span class="checkmark"></span>
+                                  </label>
+                            </p>
+                            <p>
+                                <label class="container">Assicurazione
+                                    <input type="checkbox" name="attivo" id="attivo" <%= cattivo %>>
+                                    <span class="checkmark"></span>
+                                  </label>
+                            </p> 
+                            <p>
+                                <input type="file" name="file">
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="select">
+                    <input type="submit" value="Salva">
+                </div>
+            </form> 
+    </body>
+
+</html>

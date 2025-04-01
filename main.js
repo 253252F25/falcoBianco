@@ -3,14 +3,15 @@ const session = require('express-session')
 const auth = require("./utils/auth")
 const MySQLStore = require("express-mysql-session")(session);
 const conn = require("./utils/conn");  // Importa la connessione MySQL
-
+const moment = require("moment-timezone");
+const path = require('path');
+const now = moment().tz("Europe/Rome");
 // Configura il session store
 const sessionStore = new MySQLStore({}, conn); 
 
 const app = express()
 const port = 3000
 app.use(express.static('public'));
-
 
 
 app.use(session({
@@ -21,18 +22,19 @@ app.use(session({
     cookie: { secure: false } // Cambia in `true` se usi HTTPS
 }));
 
+
 app.use(express.urlencoded({ extended: true })); // Importante per gestire req.body
 app.use(express.json()); // Se stai usando JSON invece di form
 
 app.set('view engine', 'ejs');
 
-const login = require('./routes/login');
-const index = require('./routes/index');
-
 // Usa le rotte con un prefisso
-app.use('/login', login);
-
-app.use("/index", auth, index);
+app.use('/login', require('./routes/login'));
+app.use("/index", auth, require('./routes/index'));
+app.use("/movimenti", auth, require('./routes/movimenti'));
+app.use("/conti", auth, require('./routes/conti'));
+app.use("/veicoli", auth, require('./routes/veicoli'));
+app.use("/uploads", auth, express.static(path.join(__dirname, 'uploads')));
 
 app.all("/logout", auth, (req,res) => {
   req.session.user = false
@@ -40,9 +42,6 @@ app.all("/logout", auth, (req,res) => {
   res.redirect("/login")  
 })
 
-app.all("/", (req, res) => {
-  res.redirect("/index")
-})
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)

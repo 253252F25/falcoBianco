@@ -1,16 +1,73 @@
 <div class="menu">
-    <div class="logo">Logo</div>
+  <div class="logo">Logo</div>
 
-    <a href="index" class="voce">
-        <span class="material-symbols-outlined">home</span>
-        <span class="testo">Home</span>
-    </a>
-    <a href="index" class="voce">
-        <span class="material-symbols-outlined">home</span>
-        <span class="testo">Home</span>
-    </a>
-        <a href="logout" class="voce">
-            <span class="material-symbols-outlined">logout</span>
-            <span class="testo">Log out</span>
-        </a>
+  <a href="/index" class="voce">
+    <span class="material-symbols-outlined">home</span>
+    <span class="testo">Home</span>
+  </a>
+
+  <a href="/conti" class="voce">
+    <span class="material-symbols-outlined">euro</span>
+    <span class="testo">conti</span>
+  </a>
+
+  <a href="/veicoli" class="voce">
+    <span class="material-symbols-outlined">local_shipping</span>
+    <span class="testo">veicoli</span>
+  </a>
+
+  <a href="/logout" class="voce">
+    <span class="material-symbols-outlined">logout</span>
+    <span class="testo">Log out</span>
+  </a>
 </div>
+
+<script>
+  async function inviaDati(endpoint, dati) {
+    try {
+      const risposta = await fetch(endpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(dati)
+      });
+
+      if (!risposta.ok) {
+        throw new Error(`Errore: ${risposta.status} - ${risposta.statusText}`);
+      }
+
+      return await risposta.json(); // Se la risposta è in formato JSON
+    } catch (errore) {
+      console.error('Errore nella richiesta POST:', errore);
+      throw errore;
+    }
+  }
+  function formatTime(value) {
+    return value < 10 ? "0" + value : value; // Aggiunge uno zero davanti ai numeri < 10
+  }
+</script>
+
+ 
+<% if (typeof messaggi !== 'undefined' && messaggi.length > 0) { %>
+  <% messaggi.forEach((messaggio) => { %>
+    <p class="alert <%= messaggio.tipo %>">
+        <span class="closebtn">&times;</span> <%= messaggio.messaggio %>
+    </p>
+<% }); %>
+<% } %>
+
+ 
+<script>
+inviaDati("index/messaggi", {})
+  var close = document.getElementsByClassName("closebtn");
+  var i;
+  
+  for (i = 0; i < close.length; i++) {
+    close[i].onclick = function(){
+      var div = this.parentElement;
+      div.style.opacity = "0";
+      setTimeout(function(){ div.style.display = "none"; }, 600);
+    }
+  }
+  </script>

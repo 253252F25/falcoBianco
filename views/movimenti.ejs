@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <link rel="stylesheet" href="/main.css">
+</head>
+<%- include('menu.ejs') %>
+
+    <body>
+        <div class="title">
+            Movimenti
+        </div>
+        <div id="dati" data-conto="<%= idc %>"><%= nomc %></div>
+        <div class="select">
+            
+        </div>
+
+        <div class="movimenti">
+
+        </div>
+    </body>
+
+</html>
+
+<script>
+    function creaMovimento(data, descrizione, importo, idc, idm, incom) {
+        const movimento = document.createElement("div");
+        movimento.className = `mpvimento ${incom}`;
+
+        const details = document.createElement("div");
+        details.className = "details";
+
+        const dataSpan = document.createElement("span");
+        dataSpan.className = "data";
+        dataSpan.textContent = data;
+
+        const desSpan = document.createElement("span");
+        desSpan.className = "des";
+        desSpan.textContent = descrizione;
+
+        details.appendChild(dataSpan);
+        details.appendChild(desSpan);
+
+        const dfrg = document.createElement("div");
+        dfrg.className = "dfrg";
+
+        const importoSpan = document.createElement("span");
+        importoSpan.className = "importo";
+        importoSpan.textContent = importo;
+
+        const visu = document.createElement("div");
+        visu.className = "visu";
+
+        const icon = document.createElement("a");
+        icon.href = `/movimenti/${idc}/${idm}`
+        icon.className = "material-symbols-outlined";
+        icon.textContent = "north_east";
+
+        visu.appendChild(icon);
+        dfrg.appendChild(importoSpan);
+        dfrg.appendChild(visu);
+
+        movimento.appendChild(details);
+        movimento.appendChild(dfrg);
+
+        return movimento;
+    }
+
+    var x = document.querySelector(".mySelect");
+    var tabmov = document.querySelector(".movimenti");
+    const conto = document.getElementById('dati').dataset.conto;
+    console.log(conto);
+    
+    inviaDati(`/movimenti/${conto}`).then(conti => {
+        tabmov.innerHTML = ""; // Rimuove tutte le opzioni esistenti
+        c = conti 
+        conti.forEach(mov => {
+            mov.importo > 0 ? label = "incom":label = ""
+            im = Math.abs(mov.importo)
+            tabmov.append(creaMovimento(mov.created_at, mov.descrizione, im, conto, mov.id, label))
+        });
+    });
+
+ 
+
+ 
+</script>

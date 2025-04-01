@@ -2,13 +2,9 @@ const express = require('express');
 const con = require('../utils/conn');
 const router = express.Router();
 
-router.get('/', (req, res) => {
-    res.render("index");
-});
-
 router.post('/', (req, res) => {
-    
-    con.query(query, (err, result) => {
+    idu = req.session.idu
+    con.query("SELECT c.*, u.user FROM conti as c JOIN utenti as u on u.id=c.utente WHERE utente = ?", [idu], (err, result) => {
         if (err) {
             console.error(err);
             return res.status(500).send('Server error: ' + err.code);
@@ -17,9 +13,8 @@ router.post('/', (req, res) => {
     })
 });
 
-router.all("/messaggi", (req, res)=>{
-    req.session.messaggi = []
-    res.status(200).end("OK")
+router.get("/",(req, res)=>{
+    res.render("conti")
 })
 
 module.exports = router;
