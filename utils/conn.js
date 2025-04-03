@@ -9,7 +9,4 @@ var pool = mysql.createPool({
     waitForConnections: true,
  
 });
-
-console.log("Database pool creato!");
-
 module.exports = pool;
