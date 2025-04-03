@@ -1,29 +1,27 @@
 {
-    "version": 2,
-    "builds": [
-        {
-            "src": "main.js",
-            "use": "@vercel/node",
-            "config": {
-                "includeFiles": [
-                    "public/**",
-                    "routes/**",
-                    "utils/**",
-                    "views/**"
-                ]
-            }
-        }
-    ],
-    "routes": [
-        {
-            "src": "/(.*)",
-            "dest": "main.js"
-        }
-    ],
-    "crons": [
-        {
-            "path": "/api/job",
-            "schedule": "* 3 * * *"
-        }
-    ]
+  "version": 2,
+  "builds": [
+    {
+      "src": "main.js",
+      "use": "@vercel/node",
+      "config": {
+        "includeFiles": [
+          "views/**",
+          "public/**"
+        ]
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "main.js"
+    }
+  ],
+  "crons": [
+    {
+      "path": "/job",
+      "schedule": "0 3 * * *"
+    }
+  ]
 }
