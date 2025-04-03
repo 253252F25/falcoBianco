@@ -35,12 +35,14 @@ app.use("/movimenti", auth, require('./routes/movimenti'));
 app.use("/conti", auth, require('./routes/conti'));
 app.use("/veicoli", auth, require('./routes/veicoli'));
 app.use("/uploads", auth, express.static(path.join(__dirname, 'uploads')));
+app.use("/api", auth, require('./routes/api'));
 
 app.all("/logout", auth, (req,res) => {
   req.session.user = false
   req.session.destroy();
   res.redirect("/login")  
 })
+
 app.get('/', (req, res) => {
     res.redirect("/index")
 });
