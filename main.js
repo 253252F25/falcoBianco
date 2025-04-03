@@ -36,6 +36,7 @@ app.use("/conti", auth, require('./routes/conti'));
 app.use("/veicoli", auth, require('./routes/veicoli'));
 app.use("/uploads", auth, express.static(path.join(__dirname, 'uploads')));
 app.use("/api", require('./routes/api'));
+app.use("/error", require('./routes/error'));
 
 app.all("/logout", auth, (req,res) => {
   req.session.user = false
@@ -44,7 +45,11 @@ app.all("/logout", auth, (req,res) => {
 })
 
 app.get('/', (req, res) => {
-    res.redirect("/index")
+  res.redirect("/index")
+});
+
+app.get('/', (req, res) => {
+  res.redirect("/index")
 });
 
 app.listen(port, () => {
