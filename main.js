@@ -41,12 +41,9 @@ app.all("/logout", auth, (req,res) => {
   req.session.destroy();
   res.redirect("/login")  
 })
-
-
 app.get('/', (req, res) => {
-    console.log('Views directory:', app.get('views'));
+    res.redirect("/index")
 });
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
 })
