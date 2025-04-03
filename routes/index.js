@@ -3,6 +3,8 @@ const con = require('../utils/conn');
 const router = express.Router();
 
 router.get('/', (req, res) => {
+    console.log("Ciao");
+    
     res.render("index");
 });
 
