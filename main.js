@@ -35,7 +35,7 @@ app.use("/movimenti", auth, require('./routes/movimenti'));
 app.use("/conti", auth, require('./routes/conti'));
 app.use("/veicoli", auth, require('./routes/veicoli'));
 app.use("/uploads", auth, express.static(path.join(__dirname, 'uploads')));
-app.use("/api", require('./routes/api'));
+app.use("/test", require('./routes/test'));
 app.use("/error", require('./routes/error'));
 
 app.all("/logout", auth, (req,res) => {
