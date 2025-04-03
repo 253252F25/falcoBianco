@@ -43,7 +43,7 @@ app.all("/logout", auth, (req,res) => {
 })
 
 
-router.get('/', (req, res) => {
+app.get('/', (req, res) => {
     console.log('Views directory:', app.get('views'));
 });
 
