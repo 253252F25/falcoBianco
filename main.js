@@ -15,7 +15,7 @@ app.use(express.static('public'));
 
 
 app.use(session({
-    secret: "segreto",
+    secret: process.env.FIRMA,
     resave: false,
     saveUninitialized: false, // Meglio false per sicurezza
     store: sessionStore, // Usa il database per le sessioni
