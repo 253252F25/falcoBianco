@@ -9,7 +9,7 @@
           "public/**",
           "routes/**",
           "utils/**",
-          "views/**",
+          "views/**"
         ]
       }
     }
