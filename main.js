@@ -43,6 +43,10 @@ app.all("/logout", auth, (req,res) => {
 })
 
 
+router.get('/', (req, res) => {
+    console.log('Views directory:', app.get('views'));
+});
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
