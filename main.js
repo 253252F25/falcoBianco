@@ -44,13 +44,5 @@ app.all("/logout", auth, (req,res) => {
   res.redirect("/login")  
 })
 
-app.get('/', (req, res) => {
-  res.redirect("/index")
-});
-
-app.get('/', (req, res) => {
-  res.redirect("/index")
-});
-
 app.listen(port, () => {
 })
