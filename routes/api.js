@@ -10,7 +10,7 @@ router.get("/job", (req, res) => {
     res.status(200).json({ message: "Job eseguito con successo!" });
 });
 
-router.get("/file", upload.single('file'), async (req, res) => {
+router.post("/file", upload.single('file'), async (req, res) => {
     try {
         if (!req.file) {
           return res.status(400).send("No file uploaded");
