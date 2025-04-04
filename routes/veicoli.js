@@ -1,6 +1,5 @@
 const express = require('express');
-const con = require('../utils/conn');
-const upload = require('../utils/upload');
+const con = require('../utils/conn'); 
 const router = express.Router();
 
 router.post('/', (req, res) => {
@@ -53,7 +52,7 @@ router.get("/:idv", async (req, res) => {
 });
 
  
-
+var upload = null
 router.post("/:idv", upload.single('file'), (req, res) => {
     const idv = req.params.idv;
     var { targa, telaio, modello, marca, tipo, immatricolazione, librettodata, attivo, tachigrafo, revisioni, assicurazione } = req.body;
