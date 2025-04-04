@@ -1,9 +1,11 @@
 const multer = require("multer");
-const { Blob } = require("@vercel/blob");  // Importa il pacchetto Vercel Blob
+const { Blob } = require("@vercel/blob");
 
 // Configurazione dello storage in memoria
 const storage = multer.memoryStorage();
-const uploadMiddleware = multer({ storage: storage }); // Multer viene configurato correttamente
+
+// Crea il middleware multer, che puoi usare con .single('file')
+const uploadMiddleware = multer({ storage: storage });
 
 async function generate_url(file, idu, clf) {
   try {
@@ -11,7 +13,7 @@ async function generate_url(file, idu, clf) {
       return null;
     }
 
-    const apiToken = process.env.BLOB_READ_WRITE_TOKEN;  // Sostituisci con il tuo token API di Vercel
+    const apiToken = process.env.BLOB_READ_WRITE_TOKEN;
     const fileName = `${Date.now()}-${idu}-${clf}-${file.originalname.split('.').pop()}`;
     const response = await Blob({
       apiToken,
