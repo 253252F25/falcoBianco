@@ -2,7 +2,7 @@
 
 const express = require('express');
 const con = require('../utils/conn');
-const {generate_url, upload} = require('../utils/upload');
+const {generate_url, uploadMiddleware} = require('../utils/upload');
 
 const router = express.Router();
 
@@ -15,7 +15,7 @@ router.get("/job", (req, res) => {
 
 
 
-router.post("/file", upload.single('file') , async (req, res) => {
+router.post("/file", uploadMiddleware.single('file') , async (req, res) => {
   url = await generate_url(req.file, "X", "T")
   res.status(200).end(url)
 });
