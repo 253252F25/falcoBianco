@@ -22,7 +22,7 @@
   ],
   "crons": [
     {
-      "path": "/job",
+      "path": "/test/job",
       "schedule": "0 3 * * *"
     }
   ]
