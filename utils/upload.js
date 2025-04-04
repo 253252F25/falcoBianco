@@ -17,7 +17,7 @@ async function generate_url(file, idu, clf) {
 
     const apiToken = process.env.BLOB_READ_WRITE_TOKEN;
     const fileName = `${Date.now()}-${idu}-${clf}-${file.originalname.split('.').pop()}`;
-    const response = await Blob({
+    const response = await Blob.upload({
       apiToken,
       fileName,
       buffer: file.buffer,
@@ -26,7 +26,9 @@ async function generate_url(file, idu, clf) {
 
     return response.url;
   } catch (error) {
-    console.error("Errore durante il caricamento del file su Vercel Blob:", error);
+    console.error("Errore durante il caricamento del file su Vercel Blob:");
+    console.error(error);
+    
     return null;
   }
 }
