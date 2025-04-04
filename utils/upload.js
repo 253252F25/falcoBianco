@@ -1,5 +1,5 @@
 const multer = require('multer');
-const { Blob } = require('@vercel/blob');
+const { put } = require('@vercel/blob');
 
 // Configurazione dello storage in memoria con multer
 const storage = multer.memoryStorage();
@@ -7,30 +7,27 @@ const storage = multer.memoryStorage();
 // Crea il middleware multer che puoi utilizzare con .single('file')
 const uploadMiddleware = multer({ storage: storage });
 
+
+
 async function generate_url(file, idu, clf) {
   try {
     if (!file) {
-      console.error("Funzione non riceve file");
-      
       return null;
     }
 
-    const apiToken = process.env.BLOB_READ_WRITE_TOKEN;
     const fileName = `${Date.now()}-${idu}-${clf}-${file.originalname.split('.').pop()}`;
-    const response = await Blob.upload({
-      apiToken,
-      fileName,
-      buffer: file.buffer,
-      contentType: file.mimetype,
+
+    // Usa il metodo `put` per caricare il file su Vercel Blob
+    const blob = await put(fileName, file.buffer, {
+      access: 'public',  // Impostazioni dell'accesso
     });
 
-    return response.url;
+    return blob.url;  // Restituisce l'URL del file caricato
   } catch (error) {
-    console.error("Errore durante il caricamento del file su Vercel Blob:");
-    console.error(error);
-    
+    console.error("Errore durante il caricamento del file su Vercel Blob:", error);
     return null;
   }
 }
 
 module.exports = { generate_url, uploadMiddleware };
+
