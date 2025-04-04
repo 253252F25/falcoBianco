@@ -10,6 +10,8 @@ const uploadMiddleware = multer({ storage: storage });
 async function generate_url(file, idu, clf) {
   try {
     if (!file) {
+      console.error("Funzione non riceve file");
+      
       return null;
     }
 
