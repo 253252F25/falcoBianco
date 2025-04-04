@@ -51,7 +51,7 @@ router.get("/:idv", async (req, res) => {
     }
 });
 
- 
+ /*
 var upload = null
 router.post("/:idv", upload.single('file'), (req, res) => {
     const idv = req.params.idv;
@@ -117,6 +117,6 @@ router.post("/:idv", upload.single('file'), (req, res) => {
     });
 });
 
- 
+*/
 
 module.exports = router;
