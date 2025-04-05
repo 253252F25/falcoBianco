@@ -34,9 +34,11 @@ app.use("/index", auth, require('./routes/index'));
 app.use("/movimenti", auth, require('./routes/movimenti'));
 app.use("/conti", auth, require('./routes/conti'));
 app.use("/veicoli", auth, require('./routes/veicoli'));
+app.use("/file", require('./routes/file'));
 app.use("/uploads", auth, express.static(path.join(__dirname, 'uploads')));
 app.use("/test", require('./routes/test'));
 app.get("/", (req, res) => {res.redirect("index")})
+
 app.all("/logout", auth, (req,res) => {
   req.session.user = false
   req.session.destroy();
@@ -44,4 +46,6 @@ app.all("/logout", auth, (req,res) => {
 })
 
 app.listen(port, () => {
+  console.log("Redy 🚀");
+  
 })

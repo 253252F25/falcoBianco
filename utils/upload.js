@@ -1,33 +1,39 @@
+// upload.js
 const multer = require('multer');
-const { put } = require('@vercel/blob');
+const supabase = require('./supabaseClient');
 
-// Configurazione dello storage in memoria con multer
 const storage = multer.memoryStorage();
-
-// Crea il middleware multer che puoi utilizzare con .single('file')
-const uploadMiddleware = multer({ storage: storage });
-
-
+const uploadMiddleware = multer({ storage });
 
 async function generate_url(file, idu, clf) {
   try {
-    if (!file) {
+    if (!file) return null;
+
+    const ext = file.originalname.split('.').pop();
+    const fileName = `${Date.now()}-${idu}-${clf}.${ext}`;
+    const filePath = `uploads/${fileName}`; // Questo è il percorso del file nel bucket
+
+    const { data, error } = await supabase.storage
+      .from('uploads') // nome del bucket
+      .upload(filePath, file.buffer, {
+        contentType: file.mimetype,
+        upsert: false, // Se c'è un file con lo stesso nome, non sovrascrivere
+      });
+
+    if (error) {
+      console.error('Errore upload:', error.message);
       return null;
     }
 
-    const fileName = `${Date.now()}-${idu}-${clf}-${file.originalname.split('.').pop()}`;
-
-    // Usa il metodo `put` per caricare il file su Vercel Blob
-    const blob = await put(fileName, file.buffer, {
-      access: 'public',  // Impostazioni dell'accesso
-    });
-
-    return blob.url;  // Restituisce l'URL del file caricato
-  } catch (error) {
-    console.error("Errore durante il caricamento del file su Vercel Blob:", error);
+    // Restituisci solo il percorso del file nel bucket
+    return fileName; 
+  } catch (err) {
+    console.error('Errore durante il caricamento del file:', err);
     return null;
   }
 }
 
-module.exports = { generate_url, uploadMiddleware };
 
+
+
+module.exports = { generate_url, uploadMiddleware };

@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/253252F25/railway#readme",
   "dependencies": {
-    "@vercel/blob": "^0.27.3",
+    "@supabase/supabase-js": "^2.49.4",
     "ejs": "^3.1.10",
     "express": "^4.21.2",
     "express-mysql-session": "^3.0.3",
