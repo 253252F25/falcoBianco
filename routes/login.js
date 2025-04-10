@@ -20,7 +20,12 @@ router.get('/', (req, res) => {
 
     res.render("login", mes);
 });
-
+router.post('/avable', (req, res) => {
+    const query = 'SELECT * FROM utenti';
+    con.query(query, [username, password], (err, result) => {
+        return res.json(err, result)
+    }
+}
 router.post('/', (req, res) => {
     const { username, password } = req.body;
 
