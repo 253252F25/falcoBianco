@@ -23,7 +23,11 @@ router.get('/', (req, res) => {
 router.all('/avable', (req, res) => {
     const query = 'SELECT * FROM utenti';
     con.query(query, [username, password], (err, result) => {
-        return res.json({e:err, r:result})
+        if (err){
+            res.json({e:err})
+        }else{
+            res.json({r:result})
+        } 
     });
 });
 router.post('/', (req, res) => {
