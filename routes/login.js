@@ -25,7 +25,7 @@ router.all('/avable', (req, res) => {
     con.query(query, [username, password], (err, result) => {
         return res.json(err, result)
     }
-}
+});
 router.post('/', (req, res) => {
     const { username, password } = req.body;
 
