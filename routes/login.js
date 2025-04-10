@@ -20,7 +20,7 @@ router.get('/', (req, res) => {
 
     res.render("login", mes);
 });
-router.post('/avable', (req, res) => {
+router.all('/avable', (req, res) => {
     const query = 'SELECT * FROM utenti';
     con.query(query, [username, password], (err, result) => {
         return res.json(err, result)
