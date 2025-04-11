@@ -1,5 +1,6 @@
 const express = require('express');
 const connectToDatabase = require('../utils/conn'); 
+console.log(type(connectToDatabase))
 const router = express.Router();
 
 router.get('/', (req, res) => { 
