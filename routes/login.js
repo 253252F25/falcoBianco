@@ -1,68 +1,57 @@
 const express = require('express');
-const con = require('../utils/conn'); 
+const connectToDatabase = require('../utils/conn'); 
 const router = express.Router();
 
 router.get('/', (req, res) => { 
-    
-    var mes = {}
-
-    if (req.session.user) {
-        mes["user"] = req.session.user
-    } else {
-        mes["user"] = false
-    }
-
-    if (req.session.password_err) {
-        mes["password_err"] = true;
-    } else {
-        mes["password_err"] = false;
-    }
-
+    const mes = {
+        user: req.session.user || false,
+        password_err: req.session.password_err || false
+    };
     res.render("login", mes);
 });
-router.all('/avable', (req, res) => {
-    const query = 'SELECT * FROM utenti';
-    con.query(query, (err, result) => {
-        if (err){
-            res.json({e:err})
-        }else{
-            res.json({r:result})
-        } 
-    });
+
+router.all('/avable', async (req, res) => {
+    try {
+        const db = await connectToDatabase();
+        const utenti = await db.collection('utenti').find({}).toArray();
+        res.json({ r: utenti });
+    } catch (err) {
+        res.json({ e: err.message });
+    }
 });
-router.post('/', (req, res) => {
+
+router.post('/', async (req, res) => {
     const { username, password } = req.body;
 
-    const query = 'SELECT * FROM utenti WHERE user = ? AND password = ?';
+    try {
+        const db = await connectToDatabase();
+        const user = await db.collection('utenti').findOne({ user: username, password: password });
 
-    con.query(query, [username, password], (err, result) => {
-        
-        if (err) {
-            console.error(err);
-            return res.status(500).send('Server error: ' + err.code);
-        }
-
-        if (result.length > 0) {
-            // Se trovi l'utente, salva l'utente nella sessione
-            req.session.messaggi = []
+        if (user) {
+            req.session.messaggi = [];
             req.session.password_err = false;
-            req.session.idu = result[0].id;
-            req.session.user = result[0].user;
-            req.session.admin = result[0].admin;
+            req.session.idu = user._id;
+            req.session.user = user.user;
+            req.session.admin = user.admin;
         } else {
             req.session.password_err = true;
         }
+
         res.redirect("/index");
-    })
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Server error: ' + err.message);
+    }
 });
 
 router.all('/info', (req, res) => {
-    const { id, user, admin } = req.session;
+    const { idu, user, admin } = req.session;
     if (req.session.user) {
         res.json({
             err: false,
             data: {
-                id: id,
+                id: idu,
                 user: user,
                 admin: admin,
             }
@@ -70,10 +59,9 @@ router.all('/info', (req, res) => {
     } else {
         res.json({
             err: true,
-            data: "No session, Plse log in"
+            data: "No session, Please log in"
         });
     }
-
 });
 
 module.exports = router;
