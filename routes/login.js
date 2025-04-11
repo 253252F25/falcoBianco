@@ -11,17 +11,28 @@ router.get('/', (req, res) => {
 });
 
 router.all('/avable', async (req, res) => {
-    res.send("INIZIO")
     try {
-        res.send("INIZIO 2")
+        // Log per vedere se la funzione è chiamata
+        console.log("INIZIO");
+
+        // Connessione al database
         const db = await connectToDatabase();
+
+        // Recupero degli utenti
         const utenti = await db.collection('utenti').find({}).toArray();
+
+        // Invio della risposta con i dati
         res.json({ r: utenti });
+
+        // Log per verificare che l'operazione sia conclusa
+        console.log("FINE");
     } catch (err) {
+        // Gestione degli errori
+        console.error("Errore durante la query:", err.message);
         res.json({ e: err.message });
     }
-    res.end("FINE")
 });
+
 
 router.post('/', async (req, res) => {
     const { username, password } = req.body;
