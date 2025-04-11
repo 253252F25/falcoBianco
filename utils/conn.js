@@ -25,3 +25,4 @@ async function connectToDatabase() {
     throw err;
   }
 }
+module.exports = router;
