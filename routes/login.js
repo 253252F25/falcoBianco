@@ -11,13 +11,16 @@ router.get('/', (req, res) => {
 });
 
 router.all('/avable', async (req, res) => {
+    res.send("INIZIO")
     try {
+        res.send("INIZIO 2")
         const db = await connectToDatabase();
         const utenti = await db.collection('utenti').find({}).toArray();
         res.json({ r: utenti });
     } catch (err) {
         res.json({ e: err.message });
     }
+    res.end("FINE")
 });
 
 router.post('/', async (req, res) => {
