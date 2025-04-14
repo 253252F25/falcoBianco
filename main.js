@@ -13,7 +13,6 @@ app.use(session({
     secret: process.env.FIRMA,
     resave: false,
     saveUninitialized: false, // Meglio false per sicurezza
-    store: sessionStore, // Usa il database per le sessioni
     cookie: { secure: false } // Cambia in `true` se usi HTTPS
 }));
 
