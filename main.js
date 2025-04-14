@@ -1,13 +1,8 @@
 const express = require('express')
 const session = require('express-session')
 const auth = require("./utils/auth")
-const MySQLStore = require("express-mysql-session")(session);
-const conn = require("./utils/conn");  // Importa la connessione MySQL
 const moment = require("moment-timezone");
-const path = require('path');
-const now = moment().tz("Europe/Rome");
-// Configura il session store
-const sessionStore = new MySQLStore({}, conn); 
+
 
 const app = express()
 const port = 3000
@@ -35,7 +30,6 @@ app.use("/movimenti", auth, require('./routes/movimenti'));
 app.use("/conti", auth, require('./routes/conti'));
 app.use("/veicoli", auth, require('./routes/veicoli'));
 app.use("/file", require('./routes/file'));
-app.use("/uploads", auth, express.static(path.join(__dirname, 'uploads')));
 app.use("/test", require('./routes/test'));
 app.get("/", (req, res) => {res.redirect("index")})
 
