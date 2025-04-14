@@ -39,7 +39,7 @@ router.post('/', async (req, res) => {
 
     try {
         const db = await connectToDatabase();
-        const user = await db.collection('utenti').findOne({ user: username, password: password });
+        const user = await db.collection('Falco_bianco.utenti').findOne({ user: username, password: password });
 
         if (user) {
             req.session.messaggi = [];
